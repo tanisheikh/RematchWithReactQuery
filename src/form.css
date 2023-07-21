@@ -1,0 +1,142 @@
+/* body{
+  
+} */
+body {
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    font-style: italic;
+  }
+  legend {
+    display: block;
+    padding-left: 2px;
+    padding-right: 2px;
+    border: none;
+  }
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  .cardCom {
+    width: 50%;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+  }
+  .p-card {
+    color: black;
+  }
+  .title_Btn {
+    margin: 0% 38%;
+    margin-bottom: 20px;
+  }
+  .genderDiv {
+    display: flex;
+  }
+  .hobbiesDiv {
+    margin-left: 75px;
+    margin-top: 6px;
+  }
+  .inputLabel,
+  .divinput {
+    margin-bottom: 20px;
+  }
+  .aboutLabel {
+    margin-bottom: 20px;
+  }
+  .textArea {
+    margin-top: 45px;
+    margin-left: -115px;
+  }
+  .p-avatar.p-avatar-xl {
+    width: 6rem;
+    height: 6rem;
+  }
+  .p-input-icon-right > i {
+    top: 40%;
+  }
+  .errorMsg {
+    color: red;
+  }
+  .ImageLabel {
+    padding: 40px 0px;
+    margin-right: 20px;
+  }
+  .avtarImage {
+    margin-right: 20px;
+  }
+  .deleteBtn {
+    height: 50px;
+    margin-top: 30px;
+  }
+  .imageInput {
+    width: 30%;
+    height: 50px;
+    margin-right: 20px;
+    margin-top: 30px;
+  }
+  .p-inputtext.p-component.p-password-input,
+  .allInput {
+    width: 100%;
+  }
+  .popOver {
+    margin-left: 50px !important;
+    position: absolute !important;
+    border: 1px solid #ffde95;
+  }
+  
+  .driver-popover-item .driver-popover-footer {
+    display: flex;
+    flex-direction: row;
+  }
+  .driver-close-btn {
+    display: none !important;
+  }
+  .driver-prev-btn,
+  .driver-disabled {
+    padding: 4px 8px !important;
+    border-radius: 20px !important;
+    background-color: #f5f3ef !important;
+    margin-right: 77px;
+  }
+  .driver-prev-btn::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f0a8";
+    font-size: 15px;
+    color: #f7a392;
+    margin-right: 10px;
+  }
+  .driver-next-btn::after {
+    font-family: "Font Awesome 5 Free";
+    content: "\f0a9";
+    font-weight: 900;
+    font-size: 15px;
+    margin-left: 10px;
+  }
+  .driver-next-btn {
+    background-color: #ffd885 !important;
+    border-radius: 20px !important;
+    margin-left: auto;
+  }
+  
+  .popOver::before {
+    content: "<- - - - - ";
+    position: absolute;
+    color: azure;
+    left: -20%;
+    top: 40%;
+  }
+  
+  .driver-popover-item .driver-popover-tip.left {
+    left: 0px;
+    top: 0px;
+    border-color: none;
+  }
+  .driver-popover-tip {
+    display: none !important;
+  }
+  
