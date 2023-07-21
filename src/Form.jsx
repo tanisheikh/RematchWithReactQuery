@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useMutation, useQueryClient, cancel } from "react-query";
+import { useQuery,useMutation, useQueryClient, cancel } from "react-query";
 import { useFormik, Field } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { InputText } from "primereact/inputtext";
@@ -8,14 +8,16 @@ import { Card } from "primereact/card";
 import { InputMask } from "primereact/inputmask";
 import { Password } from "primereact/password";
 import "./form.css";
-import { addData } from "./server";
+import { addData ,fetchData} from "./server";
 
 import * as Yup from "yup";
 
 const Form = () => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.formModel);
-
+const queryClient =new  useQueryClient()
+  const{data} =useQuery("userData",fetchData)
+  console.log("data>>",data)
   const addDataMution = useMutation((newAddData) => {
     console.log("newAddData>>",newAddData)
     addData(newAddData);
@@ -78,7 +80,10 @@ const Form = () => {
   // const handleSubmitFun = () => {
   //   formik.setValues({ values: formik.initialValues });
   // };
-
+  const getCachedData = () => {
+    console.log("functioncalled")
+    return queryClient.getQueryData('userData');
+  };
   return (
     <div className="container">
       <Card className="cardCom">
@@ -206,12 +211,8 @@ const Form = () => {
             className="title_Btn mt-2"
           />
           <i className="fa fa-thin fa-arrow-right"></i>
-          {/* <Button
-            type="button"
-            label="Reset"
-            // disabled={!formik.isValid || formik.isSubmitting} toggleMask
-            onClick={() => formik.handleReset}
-          /> */}
+          <Button onClick={getCachedData}>Get Cached Data</Button>
+
         </form>
       </Card>
     </div>
