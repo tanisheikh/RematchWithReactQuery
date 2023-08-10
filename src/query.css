@@ -1,0 +1,11 @@
+.loading_gif{
+    width: 100%;
+}
+.cardTable{
+    display: flex;
+}
+.editBtn{
+    display: flex;
+    align-self: flex-end;
+    margin-right: 20px;
+}

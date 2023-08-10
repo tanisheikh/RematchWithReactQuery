@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useQuery,useMutation, useQueryClient, cancel } from "react-query";
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  queryCache,
+  cancel,
+  QueryCache,
+  
+} from "react-query";
 import { useFormik, Field } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { InputText } from "primereact/inputtext";
@@ -8,20 +16,32 @@ import { Card } from "primereact/card";
 import { InputMask } from "primereact/inputmask";
 import { Password } from "primereact/password";
 import "./form.css";
-import { addData ,fetchData} from "./server";
+import { addData, fetchData } from "./server";
 
 import * as Yup from "yup";
 
 const Form = () => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.formModel);
-const queryClient =new  useQueryClient()
-  const{data} =useQuery("userData",fetchData)
-  console.log("data>>",data)
-  const addDataMution = useMutation((newAddData) => {
-    console.log("newAddData>>",newAddData)
-    addData(newAddData);
+  const queryClient = useQueryClient();
+  const queryCache = new QueryCache();
+  const { data,isError,error } = useQuery("userData", fetchData, {
+    onSuccess: () => {
+      const data=queryClient.getQueryData('userData')
+      dispatch.formModel.createRecordAsync(data);
+
+    },
   });
+  console.log("data>>", data);
+
+  // const getCachedData = () => {
+  //   console.log("functioncalled");
+  //   return queryClient.getQueryData("userData");
+  // };
+  const addDataFunction = (newAddData) => {
+    addData(newAddData);
+  };
+  const addDataMution = useMutation(addDataFunction);
   console.log("state>>", state);
   const formik = useFormik({
     initialValues: {
@@ -62,9 +82,7 @@ const queryClient =new  useQueryClient()
 
     onSubmit: (values, { resetForm }) => {
       if (values.password === values.confirmPassword) {
-        dispatch.formModel.createRecordAsync(values);
         addDataMution.mutate(values);
-
       }
       debugger;
       // console.log("formIkInitialValue", formik.initialValues);
@@ -80,10 +98,11 @@ const queryClient =new  useQueryClient()
   // const handleSubmitFun = () => {
   //   formik.setValues({ values: formik.initialValues });
   // };
-  const getCachedData = () => {
-    console.log("functioncalled")
-    return queryClient.getQueryData('userData');
-  };
+  if(isError){
+    return(
+      <h1>{error.massage}</h1>
+    )
+  }
   return (
     <div className="container">
       <Card className="cardCom">
@@ -211,9 +230,17 @@ const queryClient =new  useQueryClient()
             className="title_Btn mt-2"
           />
           <i className="fa fa-thin fa-arrow-right"></i>
-          <Button onClick={getCachedData}>Get Cached Data</Button>
-
+          {/* <Button onClick={getCachedData}>Get Cached Data</Button> */}
         </form>
+        {/* {(data || []).map((userData, index) => {
+          return (
+            <div key={index}>
+              <h1>{userData.username}</h1>
+              <h1>{userData.email}</h1>
+              <h1>{userData.phone}</h1>
+            </div>
+          );
+        })} */}
       </Card>
     </div>
   );
